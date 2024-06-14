@@ -35,4 +35,5 @@ jobs:
           git config --local user.name "anthony-illenden"
           git add plots/temps/low/NDFD_Low_Temp_*.png
           git commit -m "Update NDFD Low Temp Plot"
+          git pull --rebase origin main
           git push origin main
