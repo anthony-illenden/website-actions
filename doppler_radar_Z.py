@@ -69,11 +69,11 @@ for ds_name in sorted(catalog.datasets):
     fig = plt.figure(figsize=(12, 10))
     ax = new_map(fig, data.StationLongitude, data.StationLatitude)
     plt.title('{} Base Reflectivity at {} UTC'.format(data.Station, formatted_datetime), loc='center')
-    img = ax.pcolormesh(x, y, ref_clean2, cmap=metpy.plots.ctables.registry.get_colortable('NWSStormClearReflectivity'), vmin=-35, vmax=75, zorder=0)
+    img = ax.pcolormesh(x, y, ref_clean2, cmap=metpy.plots.ctables.registry.get_colortable('NWSStormClearReflectivity'), vmin=-35, vmax=80, zorder=0)
     cbar = fig.colorbar(img, orientation='vertical', label='Reflectivity (dBZ)', fraction=0.046, pad=0.04)
     cbar.set_ticks(np.arange(-35, 81, 10))
 
     ax.plot(-83.47, 42.7, 'ro', markersize=5, transform=ccrs.PlateCarree(), zorder=2, color='black')
     ax.add_feature(USCOUNTIES.with_scale('5m'), linewidth=0.25)
-    plt.savefig('plots/radar/Reflectivity_{}.png'.format(count), dpi=450, bbox_inches='tight')
+    plt.savefig('plots/doppler_radar/base_Z/Reflectivity_{}.png'.format(count), dpi=450, bbox_inches='tight')
     count += 1
