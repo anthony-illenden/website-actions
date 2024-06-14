@@ -33,7 +33,7 @@ low_temp = low_temp.sel(**{time_dim: slice(start_date_formatted, None)})
 
 if time_dim:
     for i in range(min(9, len(low_temp[time_dim]))):  
-        datetime_str = np.datetime_as_string(low_temp[time_dim].values[i], unit='m')
+        datetime_str = np.datetime_as_string(hi_temp[time_dim].values[i], unit='h').replace('T', ' ')
         temp_f = (low_temp[i,:,:] - 273.15) * 9/5 + 32
         temp_f_smoothed = gaussian_filter(temp_f, sigma=2)  
         fig, ax = plt.subplots(figsize=(12, 10), subplot_kw={'projection': ccrs.PlateCarree()})
@@ -46,5 +46,5 @@ if time_dim:
         cbar.set_ticklabels(['30', '40', '50', '60', '70', '80', '90', '100', '110'])
         contour = plt.contour(ds_latlon['longitude'], ds_latlon['latitude'], temp_f_smoothed, colors='black', levels=np.arange(30, 111, 1), linewidths=0.5)
         plt.clabel(contour, inline=True, fontsize=8, fmt='%1.0f')
-        plt.title('NDFD Low Temperature for {} UTC'.format(datetime_str))
+        plt.title('NDFD Low Temperature for {}00 UTC'.format(datetime_str))
         plt.savefig('plots/temps/low/NDFD_Low_Temp_{}.png'.format(i), dpi=450, bbox_inches='tight')
