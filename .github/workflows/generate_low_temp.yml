@@ -33,7 +33,13 @@ jobs:
         run: |
           git config --local user.email "tonyillenden@gmail.com"
           git config --local user.name "anthony-illenden"
-          git add plots/temps/low/NDFD_Low_Temp_*.png
-          git commit -m "Update NDFD Low Temp Plot"
+          git stash push -u
           git pull --rebase origin main
-          git push origin main
+          git stash pop
+          git add plots/temps/low/NDFD_Low_Temp_*.png
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update NDFD Low Temp Plot"
+            git push origin main
+          fi
