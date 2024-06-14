@@ -24,7 +24,7 @@ jobs:
 
       - name: Delete old plots if they exist
         run: |
-          if ls plots/high/NDFD_High_Temp_*.png 1> /dev/null 2>&1; then rm plots/high/NDFD_High_Temp_*.png; fi
+          if ls plots/temps/high/NDFD_High_Temp_*.png 1> /dev/null 2>&1; then rm plots/temps/high/NDFD_High_Temp_*.png; fi
       
       - name: Run ndfd_high_plan.py
         run: python ndfd_high_plan.py
@@ -33,6 +33,6 @@ jobs:
         run: |
           git config --local user.email "tonyillenden@gmail.com"
           git config --local user.name "anthony-illenden"
-          git add plots/high/NDFD_High_Temp_*.png
+          git add plots/temps/high/NDFD_High_Temp_*.png
           git commit -m "Update NDFD High Temp Plot"
           git push origin main
