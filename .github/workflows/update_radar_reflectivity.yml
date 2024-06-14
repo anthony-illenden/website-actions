@@ -47,3 +47,4 @@ jobs:
             # Now commit and push
             git commit -m "Update Radar Reflectivity Plots"
             git push origin main
+          fi  # <-- Added to close the if block
