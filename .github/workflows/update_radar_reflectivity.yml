@@ -35,4 +35,5 @@ jobs:
           git config --local user.name "anthony-illenden"
           git add plots/doppler_radar/base_Z/Reflectivity_*.png
           git commit -m "Update Radar Reflectivity Plots"
+          git pull --rebase origin main
           git push origin main
