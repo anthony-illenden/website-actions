@@ -33,7 +33,7 @@ jobs:
         run: |
           git config --local user.email "tonyillenden@gmail.com"
           git config --local user.name "anthony-illenden"
-          git add plots/radar/Reflectivity_*.png
+          git add plots/doppler_radar/base_Z/Reflectivity_*.png
           # Stash any changes
           git stash
           # Pull with rebase
