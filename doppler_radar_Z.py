@@ -20,19 +20,6 @@ def polar_to_cartesian(az, rng):
     y = rng * np.cos(az_rad)
     return x, y
 
-def new_map(fig, lon, lat):
-    proj = ccrs.LambertConformal(central_longitude=lon, central_latitude=lat)
-    ax = fig.add_axes([0.02, 0.02, 0.96, 0.96], projection=proj)
-    ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=2)
-    ax.add_feature(cfeature.STATES.with_scale('50m'))
-    ax.add_feature(USCOUNTIES.with_scale('5m'), linewidth=0.25)
-    
-    return ax
-
-def proj(lon, lat):
-    proj = ccrs.LambertConformal(central_longitude=lon, central_latitude=lat)
-    return proj
-
 ds = get_radarserver_datasets('http://thredds.ucar.edu/thredds/')
 url = ds['NEXRAD Level II Radar from IDD'].follow().catalog_url
 rs = RadarServer(url)
@@ -65,15 +52,18 @@ for ds_name in sorted(catalog.datasets):
     datetime_str = date_str + time_str
     dt = datetime.strptime(datetime_str, "%Y%m%d%H%M")
     formatted_datetime = dt.strftime("%Y-%m-%d %H:%M")
-
-    fig = plt.figure(figsize=(12, 10))
-    ax = new_map(fig, data.StationLongitude, data.StationLatitude)
+    fig, ax = plt.subplots(1,1, figsize=(12, 10), subplot_kw={'projection': ccrs.LambertConformal(central_longitude=data.StationLongitude, central_latitude=data.StationLatitude)})
+    ax.set_extent([-86.0, -82.0, 41.0, 45.0])
+    ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=2)
+    ax.add_feature(cfeature.STATES.with_scale('50m'))
+    ax.add_feature(USCOUNTIES.with_scale('5m'), linewidth=0.25)
+    ax.plot(-83.47, 42.7, 'ro', markersize=5, transform=ccrs.PlateCarree(), zorder=2, color='black')
     plt.title('{} Base Reflectivity at {} UTC'.format(data.Station, formatted_datetime), loc='center')
     img = ax.pcolormesh(x, y, ref_clean2, cmap=metpy.plots.ctables.registry.get_colortable('NWSStormClearReflectivity'), vmin=-35, vmax=80, zorder=0)
     cbar = fig.colorbar(img, orientation='vertical', label='Reflectivity (dBZ)', fraction=0.046, pad=0.04)
     cbar.set_ticks(np.arange(-35, 81, 10))
-
-    ax.plot(-83.47, 42.7, 'ro', markersize=5, transform=ccrs.PlateCarree(), zorder=2, color='black')
-    ax.add_feature(USCOUNTIES.with_scale('5m'), linewidth=0.25)
+    print(ref_clean2.max())
+    plt.text(0.995, 0.975, 'Max dBZ: {}'.format(ref_clean2.max()), horizontalalignment='right', transform=ax.transAxes)
+    plt.show()
     plt.savefig('plots/doppler_radar/base_Z/Reflectivity_{}.png'.format(count), dpi=450, bbox_inches='tight')
     count += 1
