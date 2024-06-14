@@ -8,7 +8,7 @@ import numpy as np
 from metpy.plots import USCOUNTIES
 from scipy.ndimage import gaussian_filter
 
-start_date = datetime.datetime.now() - timedelta(hours=4)
+start_date = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
 url = "https://thredds.ucar.edu/thredds/dodsC/grib/NCEP/NDFD/NWS/CONUS/NOAAPORT/Best"
 ds = xr.open_dataset(url, engine='netcdf4')
