@@ -35,4 +35,5 @@ jobs:
           git config --local user.name "anthony-illenden"
           git add plots/temps/high/NDFD_High_Temp_*.png
           git commit -m "Update NDFD High Temp Plot"
+          git pull --rebase origin main
           git push origin main
