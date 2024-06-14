@@ -24,8 +24,8 @@ jobs:
 
       - name: Delete old plots if they exist
         run: |
-          if ls plots/doppler_radar/base_Z/Reflectivity_*.png 1> /dev/null 2>&1; then rm plots/doppler_radar/base_Z/Reflectivity_*.png; fi
-      
+          find plots/doppler_radar/base_Z/ -name 'Reflectivity_*.png' -exec rm {} +
+
       - name: Run doppler_radar_Z.py
         run: python doppler_radar_Z.py
       
@@ -34,12 +34,16 @@ jobs:
           git config --local user.email "tonyillenden@gmail.com"
           git config --local user.name "anthony-illenden"
           git add plots/doppler_radar/base_Z/Reflectivity_*.png
-          # Stash any changes
-          git stash
-          # Pull with rebase
-          git pull --rebase origin main
-          # Pop the stash
-          git stash pop
-          # Now commit and push
-          git commit -m "Update Radar Reflectivity Plots"
-          git push origin main
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            # Stash any changes
+            git stash
+            # Pull with rebase
+            git pull --rebase origin main
+            # Pop the stash
+            git stash pop
+            # Now commit and push
+            git commit -m "Update Radar Reflectivity Plots"
+            git push origin main
