@@ -33,7 +33,13 @@ jobs:
         run: |
           git config --local user.email "tonyillenden@gmail.com"
           git config --local user.name "anthony-illenden"
-          git add plots/doppler_radar/base_Z/Reflectivity_*.png
-          git commit -m "Update Radar Reflectivity Plots"
+          git add plots/radar/Reflectivity_*.png
+          # Stash any changes
+          git stash
+          # Pull with rebase
           git pull --rebase origin main
+          # Pop the stash
+          git stash pop
+          # Now commit and push
+          git commit -m "Update Radar Reflectivity Plots"
           git push origin main
