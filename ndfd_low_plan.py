@@ -33,7 +33,7 @@ low_temp = low_temp.sel(**{time_dim: slice(start_date_formatted, None)})
 
 if time_dim:
     for i in range(min(9, len(low_temp[time_dim]))):  
-        datetime_str = np.datetime_as_string(hi_temp[time_dim].values[i], unit='h').replace('T', ' ')
+        datetime_str = np.datetime_as_string(low_temp[time_dim].values[i], unit='h').replace('T', ' ')
         temp_f = (low_temp[i,:,:] - 273.15) * 9/5 + 32
         temp_f_smoothed = gaussian_filter(temp_f, sigma=2)  
         fig, ax = plt.subplots(figsize=(12, 10), subplot_kw={'projection': ccrs.PlateCarree()})
