@@ -14,8 +14,6 @@ ds = xr.open_dataset(nam_ds.access_urls['OPENDAP'])
 ds = ds.metpy.parse_cf()
 ds =  ds.metpy.assign_latitude_longitude()
 
-norm = TwoSlopeNorm(vmin=-10, vcenter=0, vmax=60)
-
 possible_time_dims = ['time', 'time1', 'time2', 'time3']
 
 time_dim = None
