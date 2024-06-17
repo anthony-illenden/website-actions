@@ -33,5 +33,5 @@ for i in range(0, len(ds['time'])):
     isohypses = plt.contour(gph_500['longitude'], gph_500['latitude'], gph_500_smoothed / 10, colors='k', levels=np.arange(480, 620, 4))
     plt.clabel(isohypses, inline=True, fontsize=12, fmt='%1.0f')
     plt.title('NAM 12KM: 500 hPa Absolute Vorticity and Geopotential Height {}'.format(abs_vort['time'].dt.strftime('%Y-%m-%d %H UTC').item()))
-    plt.savefig('plots/models/nam/vort_{}.png'.format(i), dpi=450, bbox_inches='tight')
+    plt.savefig('plots/models/nam/vort/vort_{}.png'.format(i), dpi=450, bbox_inches='tight')
     #plt.show()
