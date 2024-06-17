@@ -25,8 +25,8 @@ jobs:
 
       - name: Delete old plots if they exist
         run: |
-          find plots/models/nam/850/ -name 'temps_*.png' -exec rm {} +
-
+          find plots/models/nam/850/temps/ -name 'temps_*.png' -exec rm {} +
+          
       - name: Run nam_850_temps.py script
         run: python nam_850_temps.py
 
@@ -34,7 +34,7 @@ jobs:
         run: |
           git config --local user.email "tonyillenden@gmail.com"
           git config --local user.name "anthony-illenden"
-          git add plots/models/nam/850/temps_*.png
+          git add plots/models/nam/850/temps/temps_*.png
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
