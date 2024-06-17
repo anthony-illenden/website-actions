@@ -42,6 +42,6 @@ for i in range(0, len(ds['time'])):
     cbar = plt.colorbar(cf, orientation='horizontal', label='Vorticity (1/s)', fraction=0.046, pad=0.04)
     isohypses = plt.contour(gph_500['longitude'], gph_500['latitude'], gph_500_smoothed / 10, colors='k', levels=np.arange(480, 620, 4))
     plt.clabel(isohypses, inline=True, fontsize=12, fmt='%1.0f')
-    plt.title('NAM 12KM: 500 hPa Absolute Vorticity and Geopotential Height {}'.format(abs_vort[time_dim].dt.strftime('%Y-%m-%d %H00 UTC').item()))
+    plt.title('{} NAM 12KM: 500 hPa Absolute Vorticity and Geopotential Heights | {} | {}'.format(abs_vort[time_dim][0].dt.strftime('%H00 UTC').item(), abs_vort[time_dim].dt.strftime('%Y-%m-%d %H00 UTC').item(), i))
     plt.savefig('plots/models/nam/vort/vort_{}.png'.format(i), dpi=450, bbox_inches='tight')
     #plt.show()
