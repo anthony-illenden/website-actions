@@ -2,8 +2,7 @@ name: Update NAM 250mb Isotach Plots
 
 on:
   schedule:
-  - cron: '30 * * * *'
-    #- cron: '00 2,8,14,20 * * *'  
+  - cron: '00 2,8,14,20 * * *'  
 
 jobs:
   update_nam_isotachs_plots:
