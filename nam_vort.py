@@ -16,11 +16,21 @@ ds =  ds.metpy.assign_latitude_longitude()
 
 norm = TwoSlopeNorm(vmin=-10, vcenter=0, vmax=60)
 
+possible_time_dims = ['time', 'time1', 'time2', 'time3']
+
+time_dim = None
+for dim in possible_time_dims:
+    if dim in ds.dims:
+        time_dim = dim
+        break
+if time_dim is None:
+    raise ValueError('Could not find the time dimension')
+
 for i in range(0, len(ds['time'])):
     abs_vort = ds['Absolute_vorticity_isobaric'].sel(isobaric1=50000)
-    abs_vort = abs_vort.isel(time=i)
+    abs_vort = abs_vort.isel(**{time_dim: i})
     gph_500 = ds['Geopotential_height_isobaric'].sel(isobaric=50000)
-    gph_500 = gph_500.isel(time=i)
+    gph_500 = gph_500.isel(**{time_dim: i})
     abs_vort_smoothed = gaussian_filter(abs_vort, sigma=2) 
     gph_500_smoothed = gaussian_filter(gph_500, sigma=2) 
     fig, ax = plt.subplots(figsize=(12, 10), subplot_kw={'projection': ccrs.PlateCarree()})
