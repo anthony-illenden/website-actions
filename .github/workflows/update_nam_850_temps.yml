@@ -2,8 +2,7 @@ name: Update NAM 850mb Temp Plots
 
 on:
   schedule:
-  - cron: '30 * * * *'
-    #- cron: '00 2,8,14,20 * * *'  
+  - cron: '00 2,8,14,20 * * *'  
 
 jobs:
   update_nam_vorticity_plots:
