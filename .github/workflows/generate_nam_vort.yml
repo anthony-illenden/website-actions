@@ -34,7 +34,7 @@ jobs:
         run: |
           git config --local user.email "tonyillenden@gmail.com"
           git config --local user.name "anthony-illenden"
-          git add plots/models/nam/vort/*.png
+          git add plots/models/nam/vort/vort_*.png
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
