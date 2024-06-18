@@ -24,7 +24,7 @@ jobs:
 
       - name: Delete old plots if they exist
         run: |
-          rm -f plots/rtma/latest_t.png plots/rtma/latest_td.png
+          rm -f plots/rtma/latest_temp.png plots/rtma/latest_dewp.png
       
       - name: Run rtma.py
         run: python rtma.py
@@ -36,7 +36,7 @@ jobs:
           git stash push -u
           git pull --rebase origin main
           git stash pop
-          git add plots/rtma/latest_t plots/rtma/latest_td
+          git add plots/rtma/latest_temp.png plots/rtma/latest_dewp.png
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
