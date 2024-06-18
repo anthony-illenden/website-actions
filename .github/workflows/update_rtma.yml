@@ -24,7 +24,7 @@ jobs:
 
       - name: Delete old plots if they exist
         run: |
-          rm -f plots/rtma/latest_t plots/rtma/latest_td
+          rm -f plots/rtma/latest_t.png plots/rtma/latest_td.png
       
       - name: Run rtma.py
         run: python rtma.py
