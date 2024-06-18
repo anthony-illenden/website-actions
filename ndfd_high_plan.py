@@ -41,7 +41,7 @@ if time_dim:
         ax.add_feature(cfeature.STATES, linewidth=0.5)
         ax.add_feature(USCOUNTIES.with_scale('5m'), linewidth=0.25)
         plt.contourf(ds_latlon['longitude'], ds_latlon['latitude'], temp_f_smoothed, cmap='jet', levels=np.arange(30, 111, 1))
-        cbar = plt.colorbar(label='Temperature (F)', fraction=0.046, pad=0.04)
+        cbar = plt.colorbar(label='Temperature (F)', fraction=0.046, pad=0.04, shrink=0.80)
         cbar.set_ticks(np.arange(30, 111, 10))
         cbar.set_ticklabels(['30', '40', '50', '60', '70', '80', '90', '100', '110'])
         contour = plt.contour(ds_latlon['longitude'], ds_latlon['latitude'], temp_f_smoothed, colors='black', levels=np.arange(30, 111, 1), linewidths=0.5)
