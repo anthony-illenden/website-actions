@@ -2,7 +2,7 @@ name: Update HRRR Z Plots
 
 on:
   schedule:
-  - cron: '0 * * * **'  
+  - cron: '0 * * * *'  
 
 jobs:
   update_hrrr_z_plots:
