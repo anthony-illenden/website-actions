@@ -46,3 +46,4 @@ for i in range(0, len(ds['time'])):
     c = count
     plt.title(f'{a} NAM 12KM: 850 hPa Temperature and Geopotential Heights | {b} | FH: {c*3}')
     plt.savefig('plots/models/nam/850/temps/temps_{}.png'.format(i), dpi=450, bbox_inches='tight')
+    count +=1
