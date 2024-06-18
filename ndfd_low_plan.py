@@ -37,7 +37,7 @@ if time_dim:
         temp_f = (low_temp[i,:,:] - 273.15) * 9/5 + 32
         temp_f_smoothed = gaussian_filter(temp_f, sigma=2)  
         fig, ax = plt.subplots(figsize=(12, 10), subplot_kw={'projection': ccrs.PlateCarree()})
-        ax.set_extent([-87.5, -82, 41, 46.5])
+        ax.set_extent([-91, -81, 40.5, 47.75])
         ax.add_feature(cfeature.STATES, linewidth=0.5)
         ax.add_feature(USCOUNTIES.with_scale('5m'), linewidth=0.25)
         plt.contourf(ds_latlon['longitude'], ds_latlon['latitude'], temp_f_smoothed, cmap='jet', levels=np.arange(30, 111, 1))
