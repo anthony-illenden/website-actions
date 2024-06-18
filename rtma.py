@@ -24,9 +24,6 @@ for dim in possible_time_dims:
 if time_dim is None:
     raise ValueError('Could not find the time dimension')
 
-sel(**{time_dim: i})
-
-
 t = rtma_data['Temperature_Analysis_height_above_ground'].sel(**{time_dim:dt}, method='nearest').squeeze()
 tf = t.metpy.convert_units('degF')
 tf_smoothed = gaussian_filter(tf, sigma=3) 
