@@ -14,7 +14,17 @@ rtma_cat = TDSCatalog('https://thredds.ucar.edu/thredds/catalog/grib/NCEP/RTMA/C
 rtma_data = rtma_cat.datasets['Latest Collection for Real Time Mesoscale Analysis 2.5 km'].remote_access(use_xarray=True)
 rtma_data = rtma_data.metpy.parse_cf()
 
-t = rtma_data['Temperature_Analysis_height_above_ground'].sel(time=dt, method='nearest').squeeze()
+possible_time_dims = ['time', 'time1', 'time2', 'time3']
+
+time_dim = None
+for dim in possible_time_dims:
+    if dim in ds.dims:
+        time_dim = dim
+        break
+if time_dim is None:
+    raise ValueError('Could not find the time dimension')
+
+t = rtma_data['Temperature_Analysis_height_above_ground'].sel(time_dim=dt, method='nearest').squeeze()
 tf = t.metpy.convert_units('degF')
 tf_smoothed = gaussian_filter(tf, sigma=3) 
 
@@ -36,7 +46,7 @@ plt.title('RTMA Air Temperature Analysis {} UTC'.format(tf.reftime.dt.strftime("
 plt.savefig('plots/rtma/temp/latest_temp.png')
 plt.show()
 
-td = rtma_data['Dewpoint_temperature_Analysis_height_above_ground'].sel(time=dt, method='nearest').squeeze()
+td = rtma_data['Dewpoint_temperature_Analysis_height_above_ground'].sel(time_dim=dt, method='nearest').squeeze()
 tdf = td.metpy.convert_units('degF')
 tdf_smoothed = gaussian_filter(tdf, sigma=2) 
 
