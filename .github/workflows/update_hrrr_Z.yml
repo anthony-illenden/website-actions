@@ -38,5 +38,6 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "Update HRRR Z Plots"
+            git pull --rebase origin main  # Added this line
             git push origin main
           fi
