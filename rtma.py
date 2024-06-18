@@ -18,7 +18,7 @@ possible_time_dims = ['time', 'time1', 'time2', 'time3']
 
 time_dim = None
 for dim in possible_time_dims:
-    if dim in ds.dims:
+    if dim in rtma_data.dims:
         time_dim = dim
         break
 if time_dim is None:
