@@ -23,6 +23,7 @@ for dim in possible_time_dims:
 if time_dim is None:
     raise ValueError('Could not find the time dimension')
 
+count = 0
 for i in range(0, len(ds['time'])):
     temp_850mb = ds['Temperature_isobaric'].sel(isobaric=85000)
     temp_850mb = temp_850mb.isel(**{time_dim: i})
@@ -40,5 +41,8 @@ for i in range(0, len(ds['time'])):
     isohypses = plt.contour(gph_850mb['longitude'], gph_850mb['latitude'], gph_850mb / 10, colors='k', levels=np.arange(90, 181, 3))
     plt.clabel(isohypses, inline=True, fontsize=12, fmt='%1.0f')
     isotherms = plt.contour(temp_850mb['longitude'], temp_850mb['latitude'], temp_850mb_smoothed-273.15, colors='white', levels=np.arange(-20, 31, 1), linestyles='dashed', linewidths=0.50)
-    plt.title('NAM 12KM: 850 hPa Temperature and Geopotential Heights {}'.format(temp_850mb[time_dim].dt.strftime('%Y-%m-%d %H00 UTC').item()))
+    a = ds[time_dim][0].dt.strftime('%H00 UTC').item()
+    b = temp_850mb[time_dim].dt.strftime('%Y-%m-%d %H00 UTC').item()
+    c = count
+    plt.title(f'{a} NAM 12KM: 850 hPa Temperature and Geopotential Heights | {b} | FH: {c*3}')
     plt.savefig('plots/models/nam/850/temps/temps_{}.png'.format(i), dpi=450, bbox_inches='tight')
