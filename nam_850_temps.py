@@ -41,4 +41,4 @@ for i in range(0, len(ds['time'])):
     plt.clabel(isohypses, inline=True, fontsize=12, fmt='%1.0f')
     isotherms = plt.contour(temp_850mb['longitude'], temp_850mb['latitude'], temp_850mb_smoothed-273.15, colors='white', levels=np.arange(-20, 31, 1), linestyles='dashed', linewidths=0.50)
     plt.title('NAM 12KM: 850 hPa Temperature and Geopotential Heights {}'.format(temp_850mb[time_dim].dt.strftime('%Y-%m-%d %H00 UTC').item()))
-    plt.savefig('plots/models/nam/850/temps_{}.png'.format(i), dpi=450, bbox_inches='tight')
+    plt.savefig('plots/models/nam/850/temps/temps_{}.png'.format(i), dpi=450, bbox_inches='tight')
