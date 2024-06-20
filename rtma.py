@@ -46,7 +46,7 @@ plt.title('RTMA Air Temperature Analysis {} UTC'.format(tf.reftime.dt.strftime("
 plt.savefig('plots/rtma/temp/latest_temp.png')
 plt.show()
 
-td = rtma_data['Dewpoint_temperature_Analysis_height_above_ground'].sel(time_dim=dt, method='nearest').squeeze()
+td = rtma_data['Dewpoint_temperature_Analysis_height_above_ground'].sel(**{time_dim:dt}, method='nearest').squeeze()
 tdf = td.metpy.convert_units('degF')
 tdf_smoothed = gaussian_filter(tdf, sigma=2) 
 
