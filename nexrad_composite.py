@@ -50,5 +50,5 @@ for i in range(0,11):
     cbar = plt.colorbar(mesh, ax=ax, orientation='vertical', label='dBZ', fraction=0.046, pad=0.04, shrink=0.80)
     cbar.set_ticks(np.arange(-25, 81, 10))
     plt.title('NEXRAD Composite Reflectivity {}'.format(formatted_datetime))
-    plt.savefig('plots/doppler_radar/nexrad_{}.png'.format(i))
+    plt.savefig('plots/doppler_radar/nexrad/reflectivity_{}.png'.format(i))
     plt.show()
