@@ -72,7 +72,6 @@ def plot_temperature_forecast(city_name, lat, lon):
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width() / 2., height, f'{int(height)}', ha='center', va='bottom')
     plt.tight_layout()
-    filename = city_name.replace(" ", "_").replace(",", "") + ".png"
     plt.savefig('plots/temps/ndfd/cites/{}.png'.format(city_name.replace(" ", "_").replace(",", "")), dpi=450)
 
 cities = [("Rochester Hills, MI", 42.66, -83.41), ("Royal Oak, MI", 42.49, -83.14), ("Ferndale, MI", 42.46, -83.13), ("Livonia, MI", 42.37, -83.35)]
