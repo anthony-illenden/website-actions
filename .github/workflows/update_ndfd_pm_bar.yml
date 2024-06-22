@@ -2,7 +2,7 @@ name: Update NDFD PM Bar
 
 on:
   schedule:
-    - cron: '30 19 * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   generate_high_temp:
