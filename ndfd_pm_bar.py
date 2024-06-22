@@ -57,7 +57,8 @@ def plot_temperature_forecast(city_name, lat, lon):
   
     highs_bar = plt.bar(high_dates, ((high - 273.15) * 1.8 + 32), color='red', label='High Temp', zorder=2)
     lows_bars = plt.bar(low_dates, ((low - 273.15) * 1.8 + 32), color='blue', label='Low Temp', width=0.65, zorder=2)
-    plt.title(f'7-Day NDFD Temperature Forecast for {city_name}')
+    #plt.title(f'7-Day NDFD Temperature Forecast for {city_name}')
+    plt.title('7-Day NDFD Temperature Forecast for {}'.format(city_name)
     ax = plt.gca()
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%A,\n%m-%d'))
     plt.ylim(40, 100)
