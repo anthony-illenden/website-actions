@@ -47,7 +47,7 @@ def fetch_data(ds_latlon, hi_temp, low_temp, dewp, target_lat, target_lon):
     return high, low, dew
 
 def plot_temperature_forecast(city_name, lat, lon):
-    city_abbr = city_abbreviations.get(city_name, city_name)  # Fallback to city_name if not found in dict
+    city_abbr = city_abbreviations.get(city_name, city_name)
     highs, time_dim_high = find_time_dim_and_select(hi_temp, start_date)
     lows, time_dim_low = find_time_dim_and_select(low_temp, start_date)
     dews, time_dim_dew = find_time_dim_and_select(dewp, start_date)
