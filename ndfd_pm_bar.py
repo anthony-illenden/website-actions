@@ -47,6 +47,7 @@ def fetch_data(ds_latlon, hi_temp, low_temp, dewp, target_lat, target_lon):
     return high, low, dew
 
 def plot_temperature_forecast(city_name, lat, lon):
+    city_abbr = city_abbreviations.get(city_name, city_name)  # Fallback to city_name if not found in dict
     highs, time_dim_high = find_time_dim_and_select(hi_temp, start_date)
     lows, time_dim_low = find_time_dim_and_select(low_temp, start_date)
     dews, time_dim_dew = find_time_dim_and_select(dewp, start_date)
@@ -57,8 +58,8 @@ def plot_temperature_forecast(city_name, lat, lon):
   
     highs_bar = plt.bar(high_dates, ((high - 273.15) * 1.8 + 32), color='red', label='High Temp', zorder=2)
     lows_bars = plt.bar(low_dates, ((low - 273.15) * 1.8 + 32), color='blue', label='Low Temp', width=0.65, zorder=2)
-    #plt.title(f'7-Day NDFD Temperature Forecast for {city_name}')
     plt.title('7-Day NDFD Temperature Forecast for {}'.format(city_name))
+
     ax = plt.gca()
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%A,\n%m-%d'))
     plt.ylim(40, 100)
@@ -73,8 +74,17 @@ def plot_temperature_forecast(city_name, lat, lon):
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width() / 2., height, f'{int(height)}', ha='center', va='bottom')
     plt.tight_layout()
-    plt.savefig('plots/temps/ndfd/cites/{}.png'.format(city_name.replace(" ", "_").replace(",", "")), dpi=450)
+    plt.savefig('plots/temps/ndfd/cities/{}.png'.format(city_abbr), dpi=450)
 
-cities = [("Rochester Hills, MI", 42.66, -83.41), ("Royal Oak, MI", 42.49, -83.14), ("Ferndale, MI", 42.46, -83.13), ("Livonia, MI", 42.37, -83.35)]
+cities = [("Rochester Hills, MI", 42.66, -83.41), ("Royal Oak, MI", 42.49, -83.14), ("Ferndale, MI", 42.46, -83.13), 
+          ("Livonia, MI", 42.37, -83.35), ("Detroit, MI", 42.33, -83.05), ("Grand Rapids, MI", 42.96, -85.66)]
+city_abbreviations = {
+    "Rochester Hills, MI": "RH",
+    "Royal Oak, MI": "RO",
+    "Ferndale, MI": "FRN",
+    "Livonia, MI": "LIV",
+    "Detroit, MI": "DET",
+    "Grand Rapids, MI": "GRR",
+}
 for city_name, lat, lon in cities:
     plot_temperature_forecast(city_name, lat, lon)
