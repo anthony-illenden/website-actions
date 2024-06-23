@@ -26,8 +26,8 @@ jobs:
         run: |
           rm -f plots/models/soundings/rh_*.png 
       
-      - name: Run rtma.py
-        run: python rtma.py
+      - name: Run rap_forecast_sounding_rh.py
+        run: python rap_forecast_sounding_rh.py
       
       - name: Commit and push RTMA changes
         run: |
