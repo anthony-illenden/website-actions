@@ -91,4 +91,4 @@ for i in range(0, max_forecasthours):
     plt.xlabel('Temperature (C)')
     
     plt.title('{} RAP: Forecast Sounding | {} | FH: {}'.format(ds[ds_timedim][0].dt.strftime('%H00 UTC').item(), ds[ds_timedim][i].dt.strftime('%Y-%m-%d %H00 UTC').item(), i))
-    plt.savefig('plots/models/rap/soundings/rh_{}.png'.format(i), dpi=450)
+    plt.savefig('plots/models/rap/soundings/rh/sounding_{}.png'.format(i), dpi=450)
