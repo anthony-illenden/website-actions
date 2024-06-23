@@ -2,7 +2,7 @@ name: Update RAP RH Forecast Sounding
 
 on:
   schedule:
-    - cron: '15 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   generate_rtma:
@@ -23,7 +23,7 @@ jobs:
           pip install xarray==2023.6.0 metpy==1.6.2 matplotlib==3.8.0 cartopy numpy==1.26.4 netCDF4==1.5.7 siphon==0.9 protobuf==3.20.3 pandas==1.5.3
       - name: Delete old plots if they exist
         run: |
-          rm -f plots/models/soundings/rh_*.png 
+          find plots/models/soundings/rh/ -name 'sounding_*.png' -exec rm {} +
       
       - name: Run rap_forecast_sounding_rh.py
         run: python rap_forecast_sounding_rh.py
@@ -32,14 +32,21 @@ jobs:
         run: |
           git config --local user.email "tonyillenden@gmail.com"
           git config --local user.name "anthony-illenden"
-          git add plots/models/soundings/rh_*.png
-          git commit -m "Prepare to update RAP Forecast Soundings" --allow-empty
+          # Stash any changes including untracked files
+          git stash push -u
+          # Pull with rebase
           git pull --rebase origin main
-          git add plots/models/soundings/rh_*.png
+          # Pop the stash
+          git stash pop
+          # Add changes to staging area again
+          git add plots/models/rap/soundings/rh/sounding_*.png
+          # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit --amend -m "Update RAP Forecast Soundings"
+            # Now commit and push
+            git commit -m "Update RAP RH Soundings"
             git push origin main
           fi
+
 
