@@ -24,7 +24,7 @@ jobs:
       
       - name: Delete old plots if they exist
         run: |
-          if ls plots/temps/ndfd/cities/*.png 1> /dev/null 2>&1; then rm plots/temps/ndfd/cities/*.png; fi
+          find plots/temps/ndfd/cities/ -name '*.png' -exec rm {} +
       
       - name: Run ndfd_pm_bar.py
         run: python ndfd_pm_bar.py
@@ -33,13 +33,20 @@ jobs:
         run: |
           git config --local user.email "tonyillenden@gmail.com"
           git config --local user.name "anthony-illenden"
-          git add plots/temps/ndfd/cities/*.png
+          # Stash any changes including untracked files
           git stash push -u
+          # Pull with rebase
           git pull --rebase origin main
+          # Pop the stash
           git stash pop
+          # Add changes to staging area again
+          git add plots/temps/ndfd/cities/*.png
+          # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
+            # Now commit and push
             git commit -m "Update NDFD PM Bar Plots"
             git push origin main
           fi
+
