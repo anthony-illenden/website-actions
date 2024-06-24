@@ -47,7 +47,7 @@ extended_run_times_utc = [3, 9, 15, 21]
 if ds[ds_timedim][0].dt.hour in extended_run_times_utc:
     max_forecasthours = 51  
 
-for i in range(0, max_forecasthours):
+for i in range(0, max_forecasthours + 1):
     temperature = (ds_point['Temperature_isobaric'][i,:] - 273.15) * units.degC
     relative_humidity = ds_point['Relative_humidity_isobaric'][i,:]
     u_wind = ds_point['u-component_of_wind_isobaric'][i,:]
