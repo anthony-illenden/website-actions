@@ -83,6 +83,10 @@ for i in range(0, max_forecasthours):
     fig = plt.figure(figsize=(9, 9))
     skew = SkewT(fig, rotation=45)
 
+    skew.plot_dry_adiabats(alpha=0.25, linewidth=1)
+    skew.plot_moist_adiabats(alpha=0.25, linewidth=1)
+    skew.plot_mixing_lines(alpha=0.25, linewidth=1)
+
     skew.plot(p, T, 'r')
     skew.plot(p, Td, 'g')
     skew.plot_barbs(p, u, v)
