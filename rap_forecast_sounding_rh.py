@@ -30,6 +30,8 @@ def fetch_data(ds, target_lat, target_lon):
 
 tds_rap = TDSCatalog('https://thredds.ucar.edu/thredds/catalog/grib/NCEP/RAP/CONUS_13km/latest.html')
 
+tds_rap = TDSCatalog('https://tds.scigw.unidata.ucar.edu/thredds/catalog/grib/NCEP/RAP/CONUS_13km/latest.html')
+
 rap_ds = tds_rap.datasets[0]
 ds = xr.open_dataset(rap_ds.access_urls['OPENDAP'])
 ds = ds.metpy.parse_cf()
