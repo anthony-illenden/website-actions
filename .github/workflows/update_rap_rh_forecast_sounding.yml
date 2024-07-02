@@ -2,7 +2,7 @@ name: Update RAP RH Forecast Sounding
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/30 * * * *'
 
 jobs:
   generate_rtma:
