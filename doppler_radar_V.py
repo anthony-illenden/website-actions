@@ -57,6 +57,8 @@ for ds_name in sorted(catalog.datasets):
     ax.add_feature(cfeature.COASTLINE.with_scale('50m'), linewidth=2)
     ax.add_feature(cfeature.STATES.with_scale('50m'))
     ax.add_feature(USCOUNTIES.with_scale('5m'), linewidth=0.25)
+    ax.add_feature(cfeature.LAKES, zorder=1, color='#ecf9fd')
+    ax.add_feature(cfeature.LAND, color='#fbf5e9')
     ax.plot(-83.47, 42.7, 'ro', markersize=5, transform=ccrs.PlateCarree(), zorder=2, color='black')
     plt.title('{} Base Radial Velocity at {} UTC'.format(data.Station, formatted_datetime), loc='center')
     img = ax.pcolormesh(x_v, y_v,v_clean, cmap=metpy.plots.ctables.registry.get_colortable('NWS8bitVel'), vmin=-100, vmax=100, zorder=0)
