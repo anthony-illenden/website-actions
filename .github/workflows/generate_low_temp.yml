@@ -2,7 +2,7 @@ name: Generate NDFD Low Temp Plan Outputs
 
 on:
   schedule:
-    - cron: '35 5,17 * * *'
+    - cron: 30 */6 * * *
 
 jobs:
   generate_low_temp:
