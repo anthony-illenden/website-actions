@@ -132,7 +132,7 @@ wspd_1000 = mpcalc.wind_speed(u_1000, v_1000)
 wspd = ((wspd_850 + wspd_1000) / 2) * 1.94384
 
 count = 0
-for i in range(0, len(ds_latlon['time'])):
+for i in range(0, 49):
     wf_850_temp_vec = np.vectorize(wf_850_temp)
     wf_850_700_rh_vec = np.vectorize(wf_850_700_rh)
     wf_1000_850_ws_vec = np.vectorize(wf_1000_850_ws)
@@ -159,6 +159,6 @@ for i in range(0, len(ds_latlon['time'])):
     cbar = plt.colorbar(cf, ax=ax, orientation='vertical',fraction=0.046, pad=0.04)
     cbar.set_ticks([0.5, 1.5, 2.5])
     cbar.set_ticklabels(['Low', 'Moderate', 'High'], fontsize=12)
-    plt.title('{} GFS: LES Parameter for High Snowfall Rates | {} | FH: {}'.format(ds[time_dim][0].dt.strftime('%H00 UTC').item(), ds[time_dim][i].dt.strftime('%Y-%m-%d %H00 UTC').item(), count*3), fontsize=16)
+    plt.title('{} GFS: LES Parameter for High Snowfall Rates | {} | FH: {}'.format(ds[time_dim][0].dt.strftime('%H00 UTC').item(), ds[time_dim][i].dt.strftime('%Y-%m-%d %H00 UTC').item(), count*3), fontsize=14)
     plt.savefig('plots/models/gfs/les/les_{}.png'.format(i), dpi=450, bbox_inches='tight')
     count += 1
